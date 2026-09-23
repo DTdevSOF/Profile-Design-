@@ -1,0 +1,22 @@
+public class home {
+    private static final String SCRIPT = "<script>\n"
+            + "  // Active tab highlighting on scroll + click-to-scroll\n"
+            + "  const tabs = document.querySelectorAll('.tab');\n"
+            + "  const sections = [...tabs].map(t => document.querySelector(t.dataset.target));\n"
+            + "\n"
+            + "  tabs.forEach(tab => {\n"
+            + "    tab.addEventListener('click', () => {\n"
+            + "      document.querySelector(tab.dataset.target).scrollIntoView({behavior:'smooth'});\n"
+            + "    });\n"
+            + "  });\n"
+            + "\n"
+            + "  const setActive = () => {\n"
+            + "    let idx = 0;\n"
+            + "    const y = window.scrollY + 120;\n"
+            + "    sections.forEach((sec, i) => { if (sec && sec.offsetTop <= y) idx = i; });\n"
+            + "    tabs.forEach((t,i) => t.classList.toggle('active', i === idx));\n"
+            + "  };\n"
+            + "  window.addEventListener('scroll', setActive, {passive:true});\n"
+            + "  setActive();\n"
+            + "</script>";
+}

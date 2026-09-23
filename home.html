@@ -7,128 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#12141c;
-    --panel:#1a1d28;
-    --panel-2:#20232f;
-    --line:#2b2f3d;
-    --text:#dde1ea;
-    --muted:#8890a3;
-    --blue:#7aa2f7;
-    --amber:#e0af68;
-    --green:#a6d189;
-    --shadow: 0 20px 50px rgba(0,0,0,.35);
-    padding-top: env(safe-area-inset-top, 0px);
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-    box-sizing: border-box;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth; scroll-padding-top: calc(52px + env(safe-area-inset-top,0px));}
-  body{
-    margin:0; background:var(--bg); color:var(--text);
-    font-family:'Inter',system-ui,sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  .mono{font-family:'JetBrains Mono',monospace;}
-  a{color:inherit;}
-
-  /* Tab bar */
-  .tabbar{
-    position:sticky; top:0; z-index:20;
-    display:flex; align-items:center; gap:2px;
-    background:var(--panel); border-bottom:1px solid var(--line);
-    padding: env(safe-area-inset-top,0px) 8px 0 8px;
-    overflow-x:auto;
-  }
-  .tabbar .dots{display:flex; gap:6px; padding:0 12px 0 4px;}
-  .tabbar .dots span{width:10px;height:10px;border-radius:50%;display:inline-block;}
-  .dots span:nth-child(1){background:#f38ba8}
-  .dots span:nth-child(2){background:#e0af68}
-  .dots span:nth-child(3){background:#a6d189}
-  .tab{
-    font-size:13px; padding:10px 16px; color:var(--muted);
-    border-right:1px solid var(--line); white-space:nowrap; cursor:pointer;
-    border-top:2px solid transparent;
-  }
-  .tab.active{color:var(--text); background:var(--panel-2); border-top:2px solid var(--blue);}
-
-  main{max-width:900px; margin:0 auto; padding:0 24px;}
-
-  /* Line-numbered blocks */
-  .file{display:flex; margin:48px 0; border:1px solid var(--line); border-radius:6px; overflow:hidden; background:var(--panel);}
-  .gutter{
-    flex:0 0 44px; background:var(--panel-2); color:#565c6f;
-    font-family:'JetBrains Mono',monospace; font-size:12px; text-align:right;
-    padding:20px 10px 20px 0; user-select:none; line-height:1.9;
-  }
-  .content{flex:1; padding:20px 24px; min-width:0;}
-  .filename{
-    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted);
-    padding:8px 24px; border-bottom:1px solid var(--line); background:var(--panel-2);
-  }
-
-  
-  /* Hero */
-  .hero{padding:64px 0 32px;}
-  .kw{color:var(--blue);}
-  .str{color:var(--amber);}
-  .fn{color:var(--green);}
-  h1{font-size:clamp(28px,5vw,46px); line-height:1.15; margin:10px 0 6px; font-weight:700;}
-  .role{font-size:18px; color:var(--muted); margin-bottom:22px;}
-  .lede{max-width:60ch; line-height:1.7; color:#c3c8d4; font-size:16px;}
-  .contact-row{display:flex; flex-wrap:wrap; gap:14px; margin-top:26px; font-family:'JetBrains Mono',monospace; font-size:13px;}
-  .contact-row a, .contact-row span{
-    display:inline-flex; align-items:center; gap:6px; color:var(--muted);
-    border:1px solid var(--line); padding:7px 12px; border-radius:5px;
-    text-decoration:none; transition:border-color .15s, color .15s;
-  }
-  .contact-row a:hover{border-color:var(--blue); color:var(--text);}
-
-  h2{font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--muted); font-weight:500; margin:0 0 4px;}
-  h2 .num{color:#565c6f;}
-  h2 .name{color:var(--text); font-weight:700;}
-
-  /* Experience */
-  .exp-title{font-size:19px; font-weight:600; margin:2px 0 2px;}
-  .exp-meta{color:var(--muted); font-size:13px; font-family:'JetBrains Mono',monospace; margin-bottom:12px;}
-  .exp-desc{line-height:1.7; color:#c3c8d4;}
-
-  /* Projects */
-  .proj-list{display:grid; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:6px; overflow:hidden;}
-  .proj{background:var(--panel); padding:18px 20px; display:grid; grid-template-columns:28px 1fr; gap:14px; align-items:start;}
-  .proj-idx{font-family:'JetBrains Mono',monospace; color:#565c6f; font-size:13px; padding-top:2px;}
-  .proj-name{font-weight:600; font-size:15.5px; margin:0 0 6px;}
-  .proj-stack{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--amber); margin-bottom:8px;}
-  .proj-desc{color:#b7bccb; font-size:14px; line-height:1.6;}
-
-  /* Skills */
-  .skill-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;}
-  .skill-card{border:1px solid var(--line); border-radius:6px; padding:16px 18px; background:var(--panel);}
-  .skill-card h3{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--blue); margin:0 0 10px; font-weight:500;}
-  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
-  .chip{font-size:12.5px; font-family:'JetBrains Mono',monospace; color:#c3c8d4; background:var(--panel-2); border:1px solid var(--line); padding:4px 9px; border-radius:4px;}
-
-  /* Education */
-  .edu-box{border:1px solid var(--line); border-radius:6px; padding:20px 22px; background:var(--panel);}
-  .edu-degree{font-weight:600; font-size:16px; margin-bottom:6px;}
-  .edu-meta{color:var(--muted); font-size:14px; line-height:1.6;}
-  .honours{color:var(--green);}
-
-  footer{
-    margin-top:70px; padding:30px 0 calc(30px + env(safe-area-inset-bottom,0px));
-    border-top:1px solid var(--line); color:#565c6f; font-family:'JetBrains Mono',monospace; font-size:12px;
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
-  }
-
-  ::selection{background:rgba(122,162,247,.3);}
-
-  @media (max-width:600px){
-    .gutter{display:none;}
-    .content{padding:18px;}
-    .proj{grid-template-columns:20px 1fr;}
-  }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -150,7 +29,7 @@
     <div class="contact-row">
       <a href="tel:0750924974">📞 075 0924 974</a>
       <a href="mailto:dinithabc2001@gmail.com">✉️ dinithabc2001@gmail.com</a>
-      <a href="https://github.io/DTdevSE" target="_blank" rel="noopener">🔗 github.io/DTdevSE</a>
+      <a href="https://github.io/DTdevSOF" target="_blank" rel="noopener">🔗 github.io/DTdevSE</a>
       <span>📍 Loluwagoda, Mirigama</span>
     </div>
   </section>
@@ -267,26 +146,7 @@
 
 </main>
 
-<script>
-  // Active tab highlighting on scroll + click-to-scroll
-  const tabs = document.querySelectorAll('.tab');
-  const sections = [...tabs].map(t => document.querySelector(t.dataset.target));
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelector(tab.dataset.target).scrollIntoView({behavior:'smooth'});
-    });
-  });
-
-  const setActive = () => {
-    let idx = 0;
-    const y = window.scrollY + 120;
-    sections.forEach((sec, i) => { if (sec && sec.offsetTop <= y) idx = i; });
-    tabs.forEach((t,i) => t.classList.toggle('active', i === idx));
-  };
-  window.addEventListener('scroll', setActive, {passive:true});
-  setActive();
-</script>
 
 </body>
 </html>
